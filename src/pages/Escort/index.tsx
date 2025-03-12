@@ -41,6 +41,17 @@ export default function Page() {
       hideInSearch: true,
     },
     {
+      title: '图片',
+      dataIndex: 'picture',
+      hideInSearch: true,
+      ellipsis: true,
+      render: (text, record) => {
+        return (
+          <img src={record.picture} alt="图片" style={{ width:'50%', height: '50%' }} />
+        );
+      },
+    },
+    {
       title: '评分',
       dataIndex: 'accessScore',
       hideInSearch: true,

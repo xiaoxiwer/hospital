@@ -9,10 +9,11 @@ const api = {
   getHospitalList: '/api/hospitalInfo/list',
   addHospital: '/api/hospitalInfo/save',
   getEscortList: 'api/escort/list',
+  auditEscort: '/api/admin/audit',
   // 登出
   getLogout: '/api/outLogin',
   // 商品列表
-  getProductList: '/api/product/list',
+  getProductList: '/api/welfareShop/list',
   // 商品状态列表
   getProductStatusList: '/api/product/status',
   //类别列表
@@ -45,8 +46,14 @@ const api = {
 const token =
   'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsInBhc3N3b3JkIjoiJDJhJDEwJHMuMWlpbE5CNFQyVmRWOG1Wc3lnNy5jRFAuTTFKVE9aLmh2VWpUTzVzYkk3RGlZaG9QQkZxIiwicm9sZSI6IlJPTEVfQURNSU4iLCJpc3MiOiJnb25nRFkiLCJleHAiOjE3NDE3ODQyNTgsImlhdCI6MTc0MTY5Nzg1OCwidXNlcm5hbWUiOiJhZG1pbiJ9.E0xCOXownlwSOtlS8xx9Utc8lXOkDZxSWExiInrDdJ4';
 const getToken = () => sessionStorage.getItem('Authorization');
-export const getProductList = (params: any) => {
-  return request(api.getProductList, { method: 'post', data: params });
+
+export const getProductList = () => {
+  return request(api.getProductList, {
+    method: 'get', headers: {
+      Authorization: token,
+      'Source-Platform': 'browser',
+    },
+  });
 };
 export const getProductStatusList = (params: any) => {
   return request(api.getProductStatusList, {
@@ -100,10 +107,10 @@ export const getOrderList = (isAdmin: boolean) => {
     },
   });
 };
-export const getEscortList = () => {
+export const getEscortList = (status?: number) => {
   return request(api.getEscortList, {
     method: 'post',
-    data: {},
+    data: { status },
     headers: {
       Authorization: token,
       'Source-Platform': 'browser',
@@ -129,6 +136,18 @@ export const addHospital = (params: any) => {
     },
   });
 };
+
+export const auditEscort = (ids: number[]) => {
+  return request(api.auditEscort, {
+    method: 'post',
+    data: { ids },
+    headers: {
+      Authorization: token,
+      'Source-Platform': 'browser',
+    },
+  });
+
+}
 export const getCollectionProduct = (id: number) => {
   return request(api.getCollectionProduct(id), {
     method: 'get',
