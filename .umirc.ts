@@ -12,7 +12,13 @@ export default defineConfig({
   routes: [
     {
       path: '/',
-      redirect: '/order',
+      redirect: '/login',
+
+    },
+    {
+      path: '/login',
+      component: './Login',
+      layout: false,
     },
     {
       name: '订单管理',

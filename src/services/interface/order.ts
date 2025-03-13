@@ -2,6 +2,7 @@ import { request } from '@umijs/max';
 
 const api = {
   // 登录
+  getLogin: '/api/login',
   //   getOrderList: '/api/order/list',
   getOrderList(isAdmin: boolean) {
     return `/api/order/list?isAdmin=${isAdmin}`;
@@ -43,10 +44,11 @@ const api = {
   sendOrder: '/api/orderInfo/start',
 };
 
-const token =
-  'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsInBhc3N3b3JkIjoiJDJhJDEwJHMuMWlpbE5CNFQyVmRWOG1Wc3lnNy5jRFAuTTFKVE9aLmh2VWpUTzVzYkk3RGlZaG9QQkZxIiwicm9sZSI6IlJPTEVfQURNSU4iLCJpc3MiOiJnb25nRFkiLCJleHAiOjE3NDE3ODQyNTgsImlhdCI6MTc0MTY5Nzg1OCwidXNlcm5hbWUiOiJhZG1pbiJ9.E0xCOXownlwSOtlS8xx9Utc8lXOkDZxSWExiInrDdJ4';
-const getToken = () => sessionStorage.getItem('Authorization');
+// const token =
+//   'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsInBhc3N3b3JkIjoiJDJhJDEwJHMuMWlpbE5CNFQyVmRWOG1Wc3lnNy5jRFAuTTFKVE9aLmh2VWpUTzVzYkk3RGlZaG9QQkZxIiwicm9sZSI6IlJPTEVfQURNSU4iLCJpc3MiOiJnb25nRFkiLCJleHAiOjE3NDE5MTU4MTUsImlhdCI6MTc0MTgyOTQxNSwidXNlcm5hbWUiOiJhZG1pbiJ9.GEDrQEEt2Wkuekefg2S-tQAO-eBAVWZqzVmBZARWvHY';
+// const getToken = () => sessionStorage.getItem('Authorization');
 
+const token = localStorage.getItem('Authorization') || ''
 export const getProductList = () => {
   return request(api.getProductList, {
     method: 'get', headers: {
@@ -55,49 +57,16 @@ export const getProductList = () => {
     },
   });
 };
-export const getProductStatusList = (params: any) => {
-  return request(api.getProductStatusList, {
+
+export const getLogin = (params: any) => {
+  return request(api.getLogin, {
     method: 'post',
     data: params,
     headers: {
-      Authorization: getToken() || '',
+      'Source-Platform': 'browser',
     },
   });
 };
-
-export const getTypeList = () => {
-  return request(api.getTypeList, {
-    method: 'get',
-  });
-};
-export const getAddProduct = (formData: FormData) => {
-  return request(api.getAddProduct, {
-    method: 'post',
-    data: formData,
-    headers: {
-      'Content-Type': 'multipart/form-data',
-      Authorization: getToken() || '',
-    },
-  });
-};
-
-export const getLogout = () => {
-  return request(api.getLogout, {
-    method: 'post',
-    headers: {
-      Authorization: getToken() || '',
-    },
-  });
-};
-export const getProductDetail = (id: number) => {
-  return request(api.getProductDetail(id), {
-    method: 'get',
-    headers: {
-      Authorization: getToken() || '',
-    },
-  });
-};
-
 export const getOrderList = (isAdmin: boolean) => {
   return request(api.getOrderList(isAdmin), {
     method: 'get',
@@ -148,56 +117,3 @@ export const auditEscort = (ids: number[]) => {
   });
 
 }
-export const getCollectionProduct = (id: number) => {
-  return request(api.getCollectionProduct(id), {
-    method: 'get',
-    headers: {
-      Authorization: getToken() || '',
-    },
-  });
-};
-
-export const getCollection = () => {
-  return request(api.getCollection, {
-    method: 'get',
-    headers: {
-      Authorization: getToken() || '',
-    },
-  });
-};
-export const publishProduct = (params: any) => {
-  return request(api.publishProduct, {
-    method: 'post',
-    data: params,
-    headers: {
-      Authorization: getToken() || '',
-    },
-  });
-};
-export const sendMessage = (params: any) => {
-  return request(api.sendMessage, {
-    method: 'post',
-    data: params,
-    headers: {
-      Authorization: getToken() || '',
-    },
-  });
-};
-export const getMessageList = (chatCode: string) => {
-  return request(api.getMessageList(chatCode), {
-    method: 'get',
-    headers: {
-      Authorization: getToken() || '',
-    },
-  });
-};
-
-export const sendOrder = (params: any) => {
-  return request(api.sendOrder, {
-    method: 'post',
-    data: params,
-    headers: {
-      Authorization: getToken() || '',
-    },
-  });
-};
