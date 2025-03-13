@@ -99,7 +99,6 @@ export default function HospitalPage() {
 
   const fetchTenantInfoList = async () => {
     const res = await getHospitalList();
-    console.log(res.data);
     return {
       data: res.data,
       success: true,

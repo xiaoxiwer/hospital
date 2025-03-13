@@ -12,7 +12,6 @@ const Login = () => {
     setLoading(true);
     const { username, password } = values;
     const res = await getLogin({ username, password });
-    console.log('Login response:', res);
     const Authorization = res?.data?.token;
     localStorage.setItem('Authorization', Authorization);
     if (res.code === 200) {

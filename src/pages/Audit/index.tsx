@@ -37,7 +37,6 @@ export default function Page() {
     } else {
       message.error('批量审核失败');
     }
-    console.log('批量审核', selectedRowKeys);
   };
 
   const columns: ProColumns<EscortList>[] = [

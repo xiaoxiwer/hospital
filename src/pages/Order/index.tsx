@@ -94,7 +94,6 @@ export default function OrderPage() {
   const fetchTenantInfoList = async () => {
     const isAdmin = true;
     const res = await getOrderList(isAdmin);
-    console.log(res.data);
     return {
       data: res.data,
       success: true,

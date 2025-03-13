@@ -100,7 +100,6 @@ export default function Page() {
 
   const fetchTenantInfoList = async () => {
     const res = await getEscortList();
-    console.log(res.data);
     return {
       data: res.data,
       success: true,
